@@ -1,4 +1,4 @@
-`package org.test;
+package ps.java;
 
 import com.google.gwt.core.client.EntryPoint;
 //import com.google.gwt.event.dom.client.ClickEvent;
