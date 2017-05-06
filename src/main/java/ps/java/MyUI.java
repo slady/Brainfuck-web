@@ -38,7 +38,8 @@ public class MyUI extends UI {
         layout.setMargin(true);
         layout.setSpacing(true);
         
-        setContent(layout);
+//        setContent(layout);
+        setContent(BrainfuckApp.prepareDebugger());
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
