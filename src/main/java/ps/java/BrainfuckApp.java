@@ -1,14 +1,8 @@
 package ps.java;
 
 import com.vaadin.server.FontAwesome;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Layout;
-import com.vaadin.ui.VerticalLayout;
-import ps.java.brainfuck.Brainfuck;
-
-import java.awt.*;
-import java.awt.event.FocusAdapter;
+import com.vaadin.shared.ui.label.ContentMode;
+import com.vaadin.ui.*;
 
 /**
  * This is a web app interpreter for the Brainfuck esoteric programming language.
@@ -18,13 +12,17 @@ import java.awt.event.FocusAdapter;
  */
 public class BrainfuckApp {
 
+    private final Label stackLabel = new Label();
+
+    private final Label codeLabel = new Label("[ax<b>x</b>++x]", ContentMode.HTML);
+
     public static Layout prepareEditor() {
         final VerticalLayout verticalLayout = new VerticalLayout();
         new Label("");
         return verticalLayout;
     }
 
-    public static Layout prepareDebugger() {
+    public Layout prepareDebugger() {
         final VerticalLayout verticalLayout = new VerticalLayout();
         final HorizontalLayout horizontalLayout = new HorizontalLayout();
 
@@ -32,9 +30,19 @@ public class BrainfuckApp {
         final Button buttonStep = new Button("Step", FontAwesome.STEP_FORWARD);
         final Button buttonPause = new Button("Pause", FontAwesome.PAUSE);
         horizontalLayout.addComponents(buttonRun, buttonStep, buttonPause);
-        verticalLayout.addComponent(horizontalLayout);
-//        Brainfuck.run("", "");
+
+        verticalLayout.addComponents(horizontalLayout, stackLabel, codeLabel);
+
+//        codeLabel.setContentMode(ContentMode.HTML);
         return verticalLayout;
+    }
+
+    public Label getCodeLabel() {
+        return codeLabel;
+    }
+
+    public Label getStackLabel() {
+        return stackLabel;
     }
 
 }

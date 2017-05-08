@@ -2,11 +2,13 @@ package ps.java;
 
 import javax.servlet.annotation.WebServlet;
 
+import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Label;
@@ -20,6 +22,8 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("mytheme")
 @Widgetset("ps.java.MyAppWidgetset")
 public class MyUI extends UI {
+
+    final BrainfuckApp app = new BrainfuckApp();
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -37,9 +41,13 @@ public class MyUI extends UI {
         layout.addComponents(name, button);
         layout.setMargin(true);
         layout.setSpacing(true);
-        
+
 //        setContent(layout);
-        setContent(BrainfuckApp.prepareDebugger());
+        setContent(app.prepareDebugger());
+        final String unescapedCode = "[ax<b>x</b>++x]";
+        final String code = SafeHtmlUtils.htmlEscape(unescapedCode);
+//        app.getCodeLabel().setValue(code);
+//        app.getCodeLabel().setContentMode(ContentMode.HTML);
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
