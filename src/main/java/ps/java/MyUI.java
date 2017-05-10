@@ -42,16 +42,13 @@ public class MyUI extends UI {
         layout.setMargin(true);
         layout.setSpacing(true);
 
-//        setContent(layout);
         setContent(app.prepareDebugger());
-        final String unescapedCode = "[ax<b>x</b>++x]";
-        final String code = SafeHtmlUtils.htmlEscape(unescapedCode);
-//        app.getCodeLabel().setValue(code);
-//        app.getCodeLabel().setContentMode(ContentMode.HTML);
+//        addExtension(app.getRefresher());
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
     }
+
 }
