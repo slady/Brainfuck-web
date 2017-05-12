@@ -66,22 +66,15 @@ public class BrainfuckApp {
         buttonRun.setEnabled(false);
         buttonPause.setEnabled(false);
 
-        tabSheet.addSelectedTabChangeListener(e -> {
-            reset();
-        });
+        tabSheet.addSelectedTabChangeListener(e -> reset());
 
-        buttonStep.addClickListener(e -> {
-            makeStep();
-        });
+        buttonStep.addClickListener(e -> BrainfuckApp.this.makeStep());
 
-        buttonReset.addClickListener(e -> {
-            reset();
-        });
+        buttonReset.addClickListener(e -> BrainfuckApp.this.reset());
 
         refresher.setRefreshInterval(3000);
-        refresher.addListener(e -> {
-            Notification.show("xxx");
-        });
+        refresher.addListener(e -> Notification.show("xxx"));
+
         Notification.show("yyy");
 
         return tabSheet;
@@ -145,6 +138,7 @@ public class BrainfuckApp {
 
         codeLabel.setValue(htmlEscape(prefix) + STYLE_START + htmlEscape(ch) + STYLE_END + htmlEscape(suffix));
         codeLabel.setContentMode(ContentMode.HTML);
+
         final BrainfuckStringInputOutput inputOutput = (BrainfuckStringInputOutput) brainfuckState.getInputOutput();
         outputLabel.setValue(htmlEscape(inputOutput.getOutput()));
     }
