@@ -7,7 +7,6 @@ import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import ps.java.brainfuck.Brainfuck;
 import ps.java.brainfuck.BrainfuckVisualDataStorage;
-import ps.java.brainfuck.data.BrainfuckState;
 import ps.java.brainfuck.io.BrainfuckStringInputOutput;
 import ps.java.brainfuck.parser.BrainfuckParser;
 
@@ -35,7 +34,7 @@ public class BrainfuckApp {
 
     private final Refresher refresher = new Refresher();
 
-    private BrainfuckState brainfuckState;
+    private Brainfuck brainfuck;
 
     public TabSheet prepareDebugger() {
         final TabSheet tabSheet = new TabSheet();
@@ -75,30 +74,29 @@ public class BrainfuckApp {
     }
 
     private void reset() {
-        brainfuckState = prepareBrainfuckState(textArea.getValue());
+        brainfuck = prepareBrainfuck(textArea.getValue());
         repaint();
     }
 
     private void makeStep() {
-        if (brainfuckState.isRunning() && brainfuckState.getPointer() < brainfuckState.getParser().getCommandInfoCount()) {
-            Brainfuck.step(brainfuckState);
+        if (brainfuck.isRunning()) {
+            brainfuck.step();
         }
 
         repaint();
     }
 
-    private BrainfuckState prepareBrainfuckState(final String program) {
+    private Brainfuck prepareBrainfuck(final String program) {
         String input = "";
         final BrainfuckParser parser = new BrainfuckParser(program);
         final BrainfuckVisualDataStorage dataStorage = new BrainfuckVisualDataStorage();
         final BrainfuckStringInputOutput inputOutput = new BrainfuckStringInputOutput(input);
-        final BrainfuckState state = new BrainfuckState(parser, dataStorage, inputOutput);
-        return state;
+        return new Brainfuck(parser, dataStorage, inputOutput);
     }
 
     private void repaint() {
         final StringBuilder stack = new StringBuilder();
-        final BrainfuckVisualDataStorage dataStorage = (BrainfuckVisualDataStorage) brainfuckState.getDataStorage();
+        final BrainfuckVisualDataStorage dataStorage = (BrainfuckVisualDataStorage) brainfuck.getDataStorage();
         final int dataPointer = dataStorage.getPointer();
         for (int i = 0; i <= dataStorage.getMax(); i++) {
             stack.append(' ');
@@ -116,7 +114,7 @@ public class BrainfuckApp {
         stackLabel.setValue(stack.toString());
         stackLabel.setContentMode(ContentMode.HTML);
 
-        final int pointer = brainfuckState.getPointer();
+        final int pointer = brainfuck.getPointer();
         final String code = textArea.getValue();
         final String prefix = code.substring(0, pointer);
         final char ch;
@@ -133,7 +131,7 @@ public class BrainfuckApp {
         codeLabel.setValue(htmlEscape(prefix) + STYLE_START + htmlEscape(ch) + STYLE_END + htmlEscape(suffix));
         codeLabel.setContentMode(ContentMode.HTML);
 
-        final BrainfuckStringInputOutput inputOutput = (BrainfuckStringInputOutput) brainfuckState.getInputOutput();
+        final BrainfuckStringInputOutput inputOutput = (BrainfuckStringInputOutput) brainfuck.getInputOutput();
         outputLabel.setValue(htmlEscape(inputOutput.getOutput()));
     }
 
