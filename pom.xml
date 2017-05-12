@@ -87,11 +87,11 @@
 			<artifactId>Brainfuck</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>org.vaadin.addons</groupId>-->
-			<!--<artifactId>refresher</artifactId>-->
-			<!--<version>1.2.3.7</version>-->
-		<!--</dependency>-->
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>refresher</artifactId>
+			<version>1.2.3.7</version>
+		</dependency>
 	</dependencies>
 
 	<build>

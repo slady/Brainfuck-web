@@ -43,7 +43,7 @@ public class MyUI extends UI {
         layout.setSpacing(true);
 
         setContent(app.prepareDebugger());
-//        addExtension(app.getRefresher());
+        addExtension(app.getRefresher());
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

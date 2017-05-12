@@ -1,5 +1,6 @@
 package ps.java;
 
+import com.github.wolfie.refresher.Refresher;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Sizeable;
 import com.vaadin.shared.ui.label.ContentMode;
@@ -7,7 +8,6 @@ import com.vaadin.ui.*;
 import ps.java.brainfuck.Brainfuck;
 import ps.java.brainfuck.BrainfuckVisualDataStorage;
 import ps.java.brainfuck.data.BrainfuckState;
-import ps.java.brainfuck.io.BrainfuckInputOutput;
 import ps.java.brainfuck.io.BrainfuckStringInputOutput;
 import ps.java.brainfuck.parser.BrainfuckParser;
 
@@ -33,7 +33,7 @@ public class BrainfuckApp {
 
     private final TextArea textArea = new TextArea();
 
-//    private final Refresher refresher = new Refresher();
+    private final Refresher refresher = new Refresher();
 
     private BrainfuckState brainfuckState;
 
@@ -78,10 +78,11 @@ public class BrainfuckApp {
             reset();
         });
 
-//        refresher.setRefreshInterval(3000);
-//        refresher.addListener(e -> {
-//            Notification.show("xxx");
-//        });
+        refresher.setRefreshInterval(3000);
+        refresher.addListener(e -> {
+            Notification.show("xxx");
+        });
+        Notification.show("yyy");
 
         return tabSheet;
     }
@@ -148,8 +149,8 @@ public class BrainfuckApp {
         outputLabel.setValue(htmlEscape(inputOutput.getOutput()));
     }
 
-//    public Refresher getRefresher() {
-//        return refresher;
-//    }
+    public Refresher getRefresher() {
+        return refresher;
+    }
 
 }
