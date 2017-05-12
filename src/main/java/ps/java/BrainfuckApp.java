@@ -68,9 +68,9 @@ public class BrainfuckApp {
 
         tabSheet.addSelectedTabChangeListener(e -> reset());
 
-        buttonStep.addClickListener(e -> BrainfuckApp.this.makeStep());
+        buttonStep.addClickListener(e -> { makeStep(); } );
 
-        buttonReset.addClickListener(e -> BrainfuckApp.this.reset());
+        buttonReset.addClickListener((Button.ClickListener) e -> { reset(); });
 
         refresher.setRefreshInterval(3000);
         refresher.addListener(e -> Notification.show("xxx"));
