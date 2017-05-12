@@ -37,12 +37,6 @@ public class BrainfuckApp {
 
     private BrainfuckState brainfuckState;
 
-    public static Layout prepareEditor() {
-        final VerticalLayout verticalLayout = new VerticalLayout();
-        new Label("");
-        return verticalLayout;
-    }
-
     public TabSheet prepareDebugger() {
         final TabSheet tabSheet = new TabSheet();
         tabSheet.addTab(textArea, "Editor");
