@@ -130,7 +130,7 @@
 				<artifactId>vaadin-maven-plugin</artifactId>
 				<version>${vaadin.plugin.version}</version>
 				<configuration>
-					<extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
+					<extraJvmArgs>-Xmx512M</extraJvmArgs>
 					<webappDirectory>${basedir}/target/classes/VAADIN/widgetsets</webappDirectory>
 					<draftCompile>false</draftCompile>
 					<compileReport>false</compileReport>
