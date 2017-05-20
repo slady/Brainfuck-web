@@ -56,19 +56,22 @@ public class BrainfuckApp {
                 new Label("Output:"), outputLabel);
         tabSheet.addTab(verticalLayout, "Debugger");
 
-        buttonRun.setEnabled(false);
-        buttonPause.setEnabled(false);
+//        buttonRun.setEnabled(false);
+//        buttonPause.setEnabled(false);
+        buttonRun.addClickListener(e -> {
+            refresher.setRefreshInterval(100);
+            refresher.addListener(v -> makeStep());
+        });
+
+        buttonPause.addClickListener(e -> {
+            refresher.setRefreshInterval(-1);
+        });
 
         tabSheet.addSelectedTabChangeListener(e -> reset());
 
         buttonStep.addClickListener(e -> { makeStep(); } );
 
         buttonReset.addClickListener((Button.ClickListener) e -> { reset(); });
-
-        refresher.setRefreshInterval(3000);
-        refresher.addListener(e -> Notification.show("xxx"));
-
-        Notification.show("yyy");
 
         return tabSheet;
     }
